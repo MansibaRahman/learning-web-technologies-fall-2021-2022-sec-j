@@ -1,0 +1,17 @@
+<employee>
+	<user id="1">
+		<name> John Carter </name>
+		<sl>23</sl>
+		<admissionDate>25/12/2015</admissionDate>
+	</user>   	
+    	<user id="2">
+		<name> Bob Marshal </name>
+		<sl>29</sl>
+		<admissionDate>13/01/1999</admissionDate>
+	</user>   
+    	<user id="3">
+		<name> Clark kent </name>
+		<sl>35</sl>
+		<admissionDate>17/06/2005</admissionDate>
+	</user>   
+</employee>
