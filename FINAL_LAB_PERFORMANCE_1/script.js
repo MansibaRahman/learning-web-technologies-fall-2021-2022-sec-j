@@ -1,7 +1,7 @@
+let resultElement = document.getElementById("result");
+let resultPrevElement = document.getElementById("resultPrev");
+let operatorElement = document.getElementById("operator");
 function btn(key) {
-  let resultElement = document.getElementById("result");
-  let resultPrevElement = document.getElementById("resultPrev");
-  let operatorElement = document.getElementById("operator");
   console.log(key);
   if (!isNaN(key)) {
     let res = resultElement.innerHTML;
@@ -15,26 +15,78 @@ function btn(key) {
     }
   } else {
     if (key == "+" || key == "-" || key == "*" || key == "/" || key == "=") {
-      if (resultElement.innerHTML != "0") {
-        switch (key) {
-          case "+":
-            resultPrevElement.innerHTML =
-              Number(resultPrevElement.innerHTML) +
-              Number(resultElement.innerHTML);
-          case "-":
-            resultPrevElement.innerHTML =
-              Number(resultPrevElement.innerHTML) +
-              Number(resultElement.innerHTML);
-          case "*":
-            resultPrevElement.innerHTML =
-              Number(resultPrevElement.innerHTML) +
-              Number(resultElement.innerHTML);
-          case "/":
-            resultPrevElement.innerHTML =
-              Number(resultPrevElement.innerHTML) +
-              Number(resultElement.innerHTML);
-        }
+      switch (operatorElement.innerHTML) {
+        case "+":
+          resultPrevElement.innerHTML =
+            Number(resultPrevElement.innerHTML) +
+            Number(resultElement.innerHTML);
+          resultElement.innerHTML = 0;
+          operatorElement.innerHTML = key;
+          hideElementsForEqual(key);
+          break;
+        case "-":
+          resultPrevElement.innerHTML =
+            Number(resultPrevElement.innerHTML) -
+            Number(resultElement.innerHTML);
+          resultElement.innerHTML = 0;
+          operatorElement.innerHTML = key;
+          hideElementsForEqual(key);
+          break;
+        case "*":
+          resultPrevElement.innerHTML =
+            Number(resultPrevElement.innerHTML) *
+            Number(resultElement.innerHTML);
+          resultElement.innerHTML = 0;
+          operatorElement.innerHTML = key;
+          hideElementsForEqual(key);
+          break;
+        case "/":
+          resultPrevElement.innerHTML =
+            Number(resultPrevElement.innerHTML) /
+            Number(resultElement.innerHTML);
+          resultElement.innerHTML = 0;
+          operatorElement.innerHTML = key;
+          hideElementsForEqual(key);
+          break;
+        case "":
+          resultPrevElement.innerHTML = resultElement.innerHTML;
+          operatorElement.innerHTML = key;
+          resultElement.innerHTML = 0;
+          break;
+        case "=":
+          resultElement.innerHTML = resultPrevElement.innerHTML;
+          break;
+      }
+    } else {
+      switch (key) {
+        case "CE":
+          resultPrevElement.innerHTML = "";
+          operatorElement.innerHTML = "=";
+          break;
+        case "C":
+          resultElement.innerHTML = "0";
+          resultPrevElement.innerHTML = "";
+          operatorElement.innerHTML = "";
+          break;
+        case "DEL":
+          resultElement.innerHTML = resultElement.innerHTML.slice(0, -1);
+          break;
+        case "+/-":
+          if (resultElement.innerHTML.charAt(0) == "-") {
+            resultElement.innerHTML = resultElement.innerHTML.substr(1);
+          } else {
+            resultElement.innerHTML = "-" + resultElement.innerHTML;
+          }
+          break;
       }
     }
+  }
+}
+
+function hideElementsForEqual(key) {
+  if (key == "=") {
+    resultElement.innerHTML = resultPrevElement.innerHTML;
+    resultPrevElement.innerHTML = "";
+    operatorElement.innerHTML = "=";
   }
 }
